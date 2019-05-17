@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	* { margin: 0; padding: 0; }
+	.pagination { position: absolute; top: 30px; left: 30px; z-index: 1; }
+	.visual_slider ul { width: 80vw; height: 45vw; position: relative; overflow: hidden; transition: all 0.3s; }
+	.slide { opacity: 0; width: 100%; height: 100%; position: absolute; transition: opacity 0.5s; }
+	.slide.on { opacity: 1; z-index: 1; }
+	.slide1 { background: blue; }
+	.slide1 .obj1 { position: absolute; width: 30%; height: 50%; background: green; left: 20%; top: 100%; transition: 0.3s; }
+	.slide1 .obj2 { position: absolute; width: 20%; height: 30%; background: yellow; left: 45%; top: 100%; transition: 0.3s; }
+	.slide1.on .obj1 { animation-delay: 1s; animation-name: slide1_obj1_ani; animation-duration: 0.5s; animation-fill-mode: forwards; }
+	.slide1.on .obj2 { animation-delay: 1.2s; animation-name: slide1_obj2_ani; animation-duration: 0.5s; animation-fill-mode: forwards; }
+	@keyframes slide1_obj1_ani {
+	  0% { top: 100%; }
+	  100% { top: 10%; }
+	}
+	@keyframes slide1_obj2_ani {
+	  0% { top: 100%; }
+	  100% { top: 20%; }
+	}
+	.slide2 { background: gold; }
+	.slide2 .obj1 { position: absolute; width: 30%; height: 30%; background: orange; left: -100%; top: 20%; transition: 0.3s; }
+	.slide2 .obj2 { position: absolute; width: 20%; height: 40%; background: purple; left: 100%; top: 30%; transition: 0.3s; }
+	.slide2.on .obj1 { animation-delay: 1s; animation-name: slide2_obj1_ani; animation-duration: 0.5s; animation-fill-mode: forwards; }
+	.slide2.on .obj2 { animation-delay: 1.2s; animation-name: slide2_obj2_ani; animation-duration: 0.5s; animation-fill-mode: forwards; }
+	@keyframes slide2_obj1_ani {
+	  0% { left: -30%; }
+	  100% { left: 20%; }
+	}
+	@keyframes slide2_obj2_ani {
+	  0% { left: 100%; }
+	  100% { left: 45%; }
+	}
+</style>
+</head>
+<body>
+	<div class="visual_slider">
+		<ul>
+			<li class="slide slide1 on" data-number="1">
+				<div class="obj1"></div>
+				<div class="obj2"></div>
+			</li>
+			<li class="slide slide2" data-number="2">
+				<div class="obj1"></div>
+				<div class="obj2"></div>
+			</li>
+		</ul>
+		<div class="pagination">
+			<button class="pager_btn" data-number="1">1</button>
+			<button class="pager_btn" data-number="2">2</button>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script>
+		$('.pager_btn').click(function(){
+			var data_number = $(this).data('number');
+			$('.slide[data-number="' + data_number + '"]').addClass('on').siblings().removeClass('on');
+		});
+	</script>
+</body>
+</html>
